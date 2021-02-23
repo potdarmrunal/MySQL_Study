@@ -1,0 +1,28 @@
+MYSQL BEST PRATICES
+
+1. Use upper case letters for SQL keywords 
+	i.e. SELECT,WHERE,INSERT
+2. End all your SQL commands using semi colons. 
+	eg. SELECT * FROM TABLE_NAME;
+3. Avoid using spaces in schema, table and field names. Use underscores instead to separate schema, table or field names 
+	eg. CREATE TABLE EMPLOYEE_DETAILS(Id int);
+4. Always use proper data type for every filed of table.
+	eg. if you are storing date type data do not use "VARCHAR" data type use "DATATIME","DATE" data type.
+5. If you are entring only test values use "CHAR" data type instead of "VARCHAR".
+6. Use sammlest data type as you can to increase the meomry performance.
+7. Use data type format as "YYYY-MM-DD" as it is a ISO data format and can be recoginsed everywhere.
+8. Use query cache to increase the performance.
+	eg. If you requires "ORDER_ID" multiple time then store it in your cache , 
+			$order_id = mysql_query("SELECT Order_Id FROM Product");
+
+9. When you just want to check is any attribute is present in a table then use "Limit", so that the database engine will stop scanning for 	   records after it finds just 1 
+	eg.	SELECT Company_Name FROM companies where Company_Name = "TCS" LIMIT 1;
+10. Avoid using "SELECT *" as to read large data more time is required for "Disk Operation" and for web server you may face network delay.
+11. Use Id int flied as your primary key , because varchar fields as primary keys are slower. 
+	i.e Suppose you have user table and name as a primary key but giving user_id as primary key increase the query performance.
+12. For "VARCHAR" datatype using ENUM is advantages as "ENUM" type columns are very fast and compact.
+13. If possible avoid using "NULL" because NULL Columns requires extra space in rows to record whether their values are NULL.
+14. Try to make columns of table as of "Fixed length".
+15. Use "Vertical Partitioning" as it shrinks the table size. And as we know samller tables performs faster.
+16. Use order by clause if needed because it slow downs the response time in multi-user environment.
+
