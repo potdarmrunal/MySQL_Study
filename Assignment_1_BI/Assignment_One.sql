@@ -108,3 +108,36 @@ SELECT left(first_name, 8),REPEAT('$', FLOOR(salary/1000)) 'SALARY($)', salary F
 
 -- 36. Write a query to display the employees with their code, first name, last name and hire date who hired either on seventh day of any month or seventh month in any year 
 SELECT employee_id,first_name,last_name,hire_date FROM employees WHERE POSITION("07" IN DATE_FORMAT(hire_date, '%d %m %Y'))>0;
+
+
+USE northwind;
+
+-- 1. Write a query to get Product name and quantity/unit
+	SELECT ProductName,QuantityPerUnit FROM Products;
+    
+-- 2. Write a query to get current Product list (Product ID and name)
+	SELECT ProductID, ProductName FROM Products WHERE Discontinued = "False" ORDER BY ProductName;
+    
+-- 3. Write a query to get discontinued Product list (Product ID and name)
+	SELECT ProductID, ProductName FROM Products WHERE Discontinued = 1 ORDER BY ProductName;
+    
+-- 4.  Write a query to get most expense and least expensive Product list (name and unit price)
+	SELECT ProductName, UnitPrice FROM Products ORDER BY UnitPrice DESC;
+    
+-- 5. Write a query to get Product list (id, name, unit price) where current products cost less than $20
+	SELECT ProductID, ProductName, UnitPrice FROM Products WHERE Discontinued = "False" AND UnitPrice < 20;
+    
+-- 6. Write a query to get Product list (id, name, unit price) where products cost between $15 and $25
+	SELECT ProductID, ProductName, UnitPrice FROM Products WHERE UnitPrice BETWEEN 15 AND 25;
+    
+-- 7. Write a query to get Product list (name, unit price) of above average price
+	SELECT ProductName, UnitPrice FROM Products WHERE UnitPrice > (SELECT AVG(UnitPrice) FROM Products) ORDER BY UnitPrice;
+    
+-- 8. Write a query to get Product list (name, unit price) of ten most expensive products
+	SELECT ProductName, UnitPrice FROM Products ORDER BY UnitPrice DESC LIMIT 10;
+    
+-- 9. Write a query to count current and discontinued products
+	SELECT COUNT(ProductID) FROM Products group by Discontinued;
+    
+-- 10.  Write a query to get Product list (name, units on order , units in stock) of stock is less than the quantity on order.
+	SELECT ProductName,  UnitsOnOrder , UnitsInStock FROM Products WHERE (((Discontinued)=False) AND ((UnitsInStock)<UnitsOnOrder));
